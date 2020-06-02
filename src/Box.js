@@ -25,12 +25,23 @@ class Box extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {}
+  pickColor() {
+    const arr = this.props.colors.filter((color) => color !== this.state.color);
+    const newColor = choice(arr);
+    this.setState({ color: newColor });
+  }
+
+  handleClick() {
+    this.pickColor();
+  }
 
   render() {
     return (
-      <div className="Box" style={{ backgroundColor: this.state.color }}>
+      <div
+        className="Box"
+        style={{ backgroundColor: this.state.color }}
         onClick={this.handleClick}
+      >
         Box
       </div>
     );

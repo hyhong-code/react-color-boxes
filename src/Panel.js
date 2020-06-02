@@ -5,7 +5,7 @@ import Box from "./Box";
 class Panel extends Component {
   static defaultProps = {
     numBoxes: 18,
-    colors: [
+    allColors: [
       "#ff9595",
       "#ffcb74",
       "#faeee7",
@@ -21,27 +21,13 @@ class Panel extends Component {
 
   constructor(props) {
     super(props);
-    let boxes = Array.from({ length: this.props.numBoxes });
-    boxes = boxes.map((box) => {
-      const idx = Math.floor(Math.random() * this.props.colors.length);
-      return this.props.colors[idx];
-    });
-    this.state = {
-      boxes: boxes,
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
-    const idx = Math.floor(Math.random() * this.props.colors.length);
-    e.target.style.backgroundColor = this.props.colors[idx];
   }
 
   render() {
     return (
       <div className="Panel">
-        {this.state.boxes.map((color, i) => (
-          <Box key={i} onClick={(e) => this.handleClick(e)} color={color} />
+        {Array.from({ length: this.props.numBoxes }).map((box) => (
+          <Box colors={this.props.allColors} />
         ))}
       </div>
     );
